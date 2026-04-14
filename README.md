@@ -10,18 +10,17 @@ Unlike traditional wellness apps that rely on manual user inputs or fixed timers
 ```mermaid
 graph TD
     A[Webcam Input] --> B[OpenCV Frame Capture]
-    B --> C["Facial Emotion Recognition Model - FER"]
-
-    C -->|Detects Happy/Neutral| D[Update Display and Log]
+    B --> C{Facial Emotion Recognition Model (FER)}
+    C -->|Detects Happy/Neutral| D[Update Display & Log]
     C -->|Detects Sad/Angry/Fear| E[Persistence Timer Started]
-
-    E --> F{"Negative Emotion > 3 seconds?"}
+    
+    E --> F{Negative Emotion > 3 seconds?}
     F -->|No| D
-    F -->|Yes| G{"In Cooldown Period?"}
-
+    F -->|Yes| G{In Cooldown Period?}
+    
     G -->|Yes| D
     G -->|No| H[Trigger Audio Alert - pyttsx3 Thread]
-    H --> I[Reset Timer and Enter Cooldown]
+    H --> I[Reset Timer & Enter Cooldown]
     I --> D
 ```
 
